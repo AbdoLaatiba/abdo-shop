@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
@@ -22,15 +23,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index', ['products' => Product::all()->take(4), 'posts' => Post::all()->take(4)]);
-});
+})->name('home');
 
 Route::get('/shop', function () {
     return view('client.shop', ['products' => Product::all()->sortDesc()]);
-});
+})->name('store');
+
 
 Route::get('/blog', function () {
     return view('client.blog', ['posts' => Post::all()->sortDesc()]);
-});
+})->name('blog');
+
+
+Route::resource('cart', CartController::class);
+
+Route::get('checkout', function(){
+    return view('client.checkout');
+})->name('checkout');
 
 Route::get('blog/post/{id}', [PostController::class, 'show'])->name('show-post');
 Route::get('store/product/{id}', [ProductController::class, 'show'])->name('product');

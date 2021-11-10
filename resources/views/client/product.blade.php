@@ -3,22 +3,22 @@
 @section('content')
     <section class="overflow-hidden text-gray-600 body-font"
         x-data="{desc : true, rev : false, det : false, 
-                                                                                                                                descShow(){
-                                                                                                                                    this.rev = false;
-                                                                                                                                    this.det = false;
-                                                                                                                                    this.desc = true
-                                                                                                                                },
-                                                                                                                                revShow(){
-                                                                                                                                    this.rev = true;
-                                                                                                                                    this.det = false; 
-                                                                                                                             this.desc = false
-                                                                                                                                },
-                                                                                                                                detShow(){
-                                                                                                                                    this.rev = false;
-                                                                                                                                    this.det = true; 
-                                                                                                                                    this.desc = false
-                                                                                                                                }
-                                                                                                                            }">
+            descShow(){
+                this.rev = false;
+                this.det = false;
+                this.desc = true
+            },
+            revShow(){
+                this.rev = true;
+                this.det = false; 
+            this.desc = false
+            },
+            detShow(){
+                this.rev = false;
+                this.det = true; 
+                this.desc = false
+            }
+        }">
         <div class="container px-5 py-24 mx-auto">
             <div class="flex flex-wrap mx-auto lg:w-4/5">
                 <div class="w-full mb-6 lg:w-1/2 lg:pr-10 lg:py-6 lg:mb-0">
@@ -38,10 +38,17 @@
                     <article x-show="desc">
                         <p class="mb-4 leading-relaxed">{{ $product->description }}</p>
                         <div class="flex">
-                            <span class="text-2xl font-medium text-gray-900 title-font">$58.00</span>
-                            <a
-                                class="flex px-6 py-2 ml-auto text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">Add
-                                To Cart</a>
+                            <span class="text-2xl font-medium text-gray-900 title-font">${{ $product->price }}</span>
+                            <form class="ml-auto" action="{{ route('cart.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <input type="hidden" name="img" value="{{ $product->img }}">
+                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                <input type="hidden" name="price" value="{{ $product->price }}">
+                                <button type="submit"
+                                    class="flex px-6 py-2 text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">Add
+                                    To Cart</button>
+                            </form>
                             <a
                                 class="inline-flex items-center justify-center w-10 h-10 p-0 ml-4 text-gray-500 bg-gray-200 border-0 rounded-full">
                                 <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

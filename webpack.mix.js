@@ -17,8 +17,6 @@ mix.js("resources/js/app.js", "public/js")
         require("tailwindcss"),
         require("autoprefixer"),
     ])
-    .sass("resources/sass/app.scss", "public/css")
-    .copy(
-        "node_modules/@fortawesome/fontawesome-free/webfonts",
-        "public/webfonts"
-    );
+    .sass("resources/sass/app.scss", "public/css");
+   
+

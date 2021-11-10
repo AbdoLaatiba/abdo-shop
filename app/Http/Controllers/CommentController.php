@@ -14,7 +14,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //return view('admin.comments.comments', ['comments' => Comment::all()->sortDesc()]);
+        return view('admin.comments.comments', ['comments' => Comment::all()->sortDesc()]);
     }
 
     /**
@@ -83,7 +83,12 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $comment->update([
+            'approved' => true
+        ]);
+
+        return redirect()->route('comments.index')->with('success', "Comment updated Successfuly");
+
     }
 
     /**

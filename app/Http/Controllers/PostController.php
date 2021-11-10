@@ -74,7 +74,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        $comments = Comment::all();
+        $comments = Comment::all()->where('approved' , true);
         return view('client.post', ['post'=> $post, 'comments' => $comments]);
     }
 
